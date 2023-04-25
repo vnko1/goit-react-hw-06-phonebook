@@ -1,17 +1,15 @@
-import PropTypes from 'prop-types';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { nanoid } from 'nanoid';
+import { useSelector, useDispatch } from 'react-redux';
+import { addContacts } from 'redux/slices';
+import { getContacts } from 'redux/selectors';
 import css from './ContactForm.module.css';
 import { submitSchema } from 'components/services/constants';
 
-const ContactForm = ({ contacts, onSubmitData }) => {
-  const onSubmit = (values, action) => {
-    const obj = {
-      name: values.name.trim(),
-      number: values.number.trim(),
-      id: nanoid(),
-    };
+const ContactForm = () => {
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
 
+  const onSubmit = (values, action) => {
     const isIncluded = contacts.some(
       contact => contact.name.toLowerCase() === values.name.toLowerCase().trim()
     );
@@ -21,8 +19,8 @@ const ContactForm = ({ contacts, onSubmitData }) => {
       alert(`${values.name.trim()} is already in contacts`);
       return;
     }
+    dispatch(addContacts(values.name.trim(), values.number.trim()));
 
-    onSubmitData(obj);
     action.resetForm();
   };
 
@@ -51,11 +49,6 @@ const ContactForm = ({ contacts, onSubmitData }) => {
       </Formik>
     </div>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmitData: PropTypes.func.isRequired,
-  contacts: PropTypes.array.isRequired,
 };
 
 export { ContactForm };
