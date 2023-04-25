@@ -1,16 +1,6 @@
 import { ContactForm, ContactList, Filter } from './phoneBook';
-
-// import { STORAGE_KEY } from './services/constants';
-// import { load, save } from './services/localStorage';
-
+import { Toaster } from 'react-hot-toast';
 export const App = () => {
-  // const [contacts, setContacts] = useState(() => load(STORAGE_KEY) ?? []);
-  // const [filter, setFilter] = useState('');
-
-  // useEffect(() => {
-  //   save(STORAGE_KEY, contacts);
-  // }, [contacts]);
-
   return (
     <div>
       <section>
@@ -20,6 +10,7 @@ export const App = () => {
           <h2>Contacts</h2>
           <Filter />
           <ContactList />
+          <Toaster />
         </div>
       </section>
     </div>

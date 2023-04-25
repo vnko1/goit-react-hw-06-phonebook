@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { Contact } from './Contact';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContacts } from 'redux/slices';
-import { filterContacts } from 'components/services/functions';
+import { deleteContacts } from 'redux/index';
+import { filterContacts } from 'components/services/index';
 import css from './ContactList.module.css';
 
 const ContactList = () => {
